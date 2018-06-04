@@ -7,6 +7,9 @@
 	Ш:<input id="width"  type="number" min="1" max="100" value="195.18" placeholder="Ширина"/>	
 	Д:<input id="length" type="number" min="1" max="100" value="318.17" placeholder="Длина"/>	
 	В:<input id="height" type="number" min="1" max="100" value="213.23" placeholder="Высота"/>
+	| Hor<input type="radio" id="hor" name="maket" checked  /> | 
+	Ver<input type="radio" id="ver" name="maket" /> |
+	
 	<button id="calculate" value="Calculate" style="margin-left: 20px">Calculate</button>
 	<input id="title" value="Cutting Die" style="width:10%" />
 	<button id="save"  style="width: 10%">Save SVG</button>
@@ -51,6 +54,8 @@ var k = height - 40 * a;
 
 var m = 15;
 var n = 15;
+
+if (document.getElementById('hor').checked==true) {
 var x = [
 	0, 
 	15, /* 1 */
@@ -179,6 +184,50 @@ var polylineGreenBottomMin2 = drawMin.polyline([ (x[32]+3)/4,(y[32]-5)/4,   (x[2
 var polylineGreenBottomMin3 = drawMin.polyline([ (x[28]+3)/4,(y[28]+2.5)/4, (x[25]+2)/4,(y[25]+2.5)/4 ]);
 var polylineGreenBottomMin4 = drawMin.polyline([ (x[23]+3)/4,(y[23]-5)/4,   (x[20]+2)/4,(y[20]-5)/4   ]);
 
+} //end of IF (Hor)
+	
+if (document.getElementById('ver').checked==true ) {
+var x = [0, /* 0 */
+		15, /* 1 */
+		 m+(width/2)+raznitsa, /* 2 */
+		 m+(width/2)+raznitsa, /* 3 */
+		 m+(width/2)+raznitsa+10*raznitsa, /* 4 */
+		 m+(width/2)+raznitsa-10*raznitsa + height, /* 5 */
+		 m+(width/2)+raznitsa+height, /* 6 */
+		 m+(width/2)+raznitsa+height, /* 7 */
+		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 8 */
+		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 9 */
+		 m+(width/2)+raznitsa+height, /* 10 */
+		 m+(width/2)+raznitsa+height, /* 11 */
+		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 12 */
+		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 13 */
+		 m+(width/2)+raznitsa+height, /* 14 */
+		 m+(width/2)+raznitsa+height, /* 15 */
+		 m+(width/2)+raznitsa, /* 16 */
+		 m+(width/2)+raznitsa, /* 17 */
+		];
+	
+var y = [0, /* 0 */
+		15, /* 1 */
+		 n, /* 2 */
+		 n+mejdu/2, /* 3 */
+		 n+mejdu/2-40*raznitsa, /* 4 */
+		 n+mejdu/2-40*raznitsa, /* 5 */
+		 n+mejdu/2-30*raznitsa, /* 6 */
+		 n+mejdu/2-10*raznitsa, /* 7 */
+		 n+mejdu/2-10*raznitsa, /* 8 */
+		 n+mejdu/2-10*raznitsa+width, /* 9 */
+		 n+mejdu/2-10*raznitsa+width, /* 10 */
+		 n+mejdu/2-10*raznitsa+width+mejdu, /* 11 */
+		 n+mejdu/2-10*raznitsa+width+mejdu, /* 12 */
+		 n+mejdu/2-10*raznitsa+width+mejdu+length, /* 13 */
+		 n+mejdu/2-10*raznitsa+width+mejdu+length, /* 14 */
+		 n+mejdu/2-10*raznitsa+width+mejdu+length+20*raznitsa, /* 15 */
+		 n+mejdu/2-10*raznitsa+width+mejdu+length+20*raznitsa, /* 16 */
+		 n+mejdu/2-10*raznitsa+width+mejdu+length, /* 17 */
+		];
+}
+	
 polyline.fill('none').move(10, 10);
 polylineT.fill('none');
 polylineU.fill('none');
