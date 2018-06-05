@@ -4,25 +4,25 @@
 		<script type="text/javascript" src="js/Editor.js"></script>
 		<link rel="stylesheet" href="style.css">
 	</head>
-	Ø:<input id="width"  type="number" min="1" max="100" value="195.18" placeholder="Øèðèíà"/>	
-	Ä:<input id="length" type="number" min="1" max="100" value="318.17" placeholder="Äëèíà"/>	
-	Â:<input id="height" type="number" min="1" max="100" value="213.23" placeholder="Âûñîòà"/>
-	| Hor<input type="radio" id="hor" name="maket" checked  /> | 
-	Ver<input type="radio" id="ver" name="maket" /> |
-	
+	Ð¨:<input id="width"  type="number" min="1" max="100" value="195.18" placeholder="Ð¨Ð¸Ñ€Ð¸Ð½Ð°"/>	
+	Ð”:<input id="length" type="number" min="1" max="100" value="318.17" placeholder="Ð”Ð»Ð¸Ð½Ð°"/>	
+	Ð’:<input id="height" type="number" min="1" max="100" value="213.23" placeholder="Ð’Ñ‹ÑÐ¾Ñ‚Ð°"/>
+	| Hor<input type="radio" id="hor" name="maket"  /> |
+	Ver<input type="radio" id="ver" name="maket" checked/> |
+
 	<button id="calculate" value="Calculate" style="margin-left: 20px">Calculate</button>
 	<input id="title" value="Cutting Die" style="width:10%" />
 	<button id="save"  style="width: 10%">Save SVG</button>
 	<button id="clear" style="width: 10%">Clear</button>
 <div id="drawing"></div>
 <div id="drawingMin"></div>
-			
-	
+
+
 <script>
 //function calculate(){
 var draw = SVG('drawing').size(3931, 2797);
 var drawMin = SVG('drawingMin').size(1310, 932);
-	
+
 var editor = new Editor(SvgjsSvg1001);
 var editorMin = new Editor(SvgjsSvg1008);
 
@@ -31,11 +31,11 @@ editor.clear();
 editorMin.clear();
 //var size = "auto";
 var raznitsa = 3.779528; // pixel / mm
-	
-var w = document.getElementById('width').value; 
+
+var w = document.getElementById('width').value;
 var l = document.getElementById('length').value;
 var h = document.getElementById('height').value;
-	
+
 var width = parseFloat(w) * raznitsa; //195.18
 var length = parseFloat(l) * raznitsa; //318.17
 var height = parseFloat(h) * raznitsa - 0.298*raznitsa; //213.23
@@ -45,7 +45,7 @@ var mejdu = 4 * raznitsa;
 console.log("width", width);
 console.log("length", length);
 console.log("height", height);
-	
+
 var alpha = ((Math.sin(15*Math.PI/180)) * raznitsa).toPrecision(3);
 var betta = ((Math.sin(75*Math.PI/180)) * raznitsa).toPrecision(3);
 
@@ -55,9 +55,13 @@ var k = height - 40 * a;
 var m = 15;
 var n = 15;
 
+var strokeRed = { color: '#e31e24', width: 0.8, linecap: 'square', linejoin: 'square' };
+var strokeGreen = { color: '#0f0', width: 0.8, linecap: 'square', linejoin: 'square' };
+
+
 if (document.getElementById('hor').checked==true) {
 var x = [
-	0, 
+	0,
 	15, /* 1 */
 	m+length-2*raznitsa,
 	m+length-2*raznitsa,
@@ -145,150 +149,215 @@ var y = [
 	];
 
 var polyline = draw.polyline( [ x[1],y[1], x[2],y[2], x[3],y[3], x[4],y[4], x[5],y[5], x[6],y[6], x[7],y[7], x[8],y[8], x[9],y[9], x[10],y[10], x[11],y[11], x[12],y[12], x[13],y[13], x[14],y[14], x[15],y[15], x[16],y[16], x[19],y[19], x[20],y[20], x[21],y[21], x[22],y[22], x[23],y[23], x[24],y[24], x[25],y[25], x[26],y[26], x[27],y[27], x[28],y[28], x[29],y[29], x[30],y[30], x[31],y[31], x[32],y[32], x[33],y[33], x[34],y[34], x[35],y[35], x[36],y[36], x[37],y[37], x[38],y[38], x[39],y[39], x[1],y[1],  ]);
-	
+
 var polylineMin = drawMin.polyline( [ x[1]/4,y[1]/4, x[2]/4,y[2]/4, x[3]/4,y[3]/4, x[4]/4,y[4]/4, x[5]/4,y[5]/4, x[6]/4,y[6]/4, x[7]/4,y[7]/4, x[8]/4,y[8]/4, x[9]/4,y[9]/4, x[10]/4,y[10]/4, x[11]/4,y[11]/4, x[12]/4,y[12]/4, x[13]/4,y[13]/4, x[14]/4,y[14]/4, x[15]/4,y[15]/4, x[16]/4,y[16]/4, x[19]/4,y[19]/4, x[20]/4,y[20]/4, x[21]/4,y[21]/4, x[22]/4,y[22]/4, x[23]/4,y[23]/4, x[24]/4,y[24]/4, x[25]/4,y[25]/4, x[26]/4,y[26]/4, x[27]/4,y[27]/4, x[28]/4,y[28]/4, x[29]/4,y[29]/4, x[30]/4,y[30]/4, x[31]/4,y[31]/4, x[32]/4,y[32]/4, x[33]/4,y[33]/4, x[34]/4,y[34]/4, x[35]/4,y[35]/4, x[36]/4,y[36]/4, x[37]/4,y[37]/4, x[38]/4,y[38]/4, x[39]/4,y[39]/4, x[1]/4 ,y[1]/4,  ]);
-	
+
 var polylineT = draw.polyline([ x[16]+3,y[16]-5, x[17],y[17],  ]);
 var polylineU = draw.polyline([ x[19]+3,y[19]-5, x[18],y[18], x[17],y[17], ]);
-	
+
 var polylineTMin = drawMin.polyline([ (x[16]+3)/4, (y[16]-5)/4, x[17]/4, y[17]/4,  ]); //min
 var polylineUMin = drawMin.polyline([ (x[19]+3)/4, (y[19]-5)/4, x[18]/4, y[18]/4, x[17]/4, y[17]/4, ]); //min
-	
-var polylineGreenTop1 = draw.polyline([ x[39]+3,y[39]-5,    x[3] +2,y[3]-12.4, ]);	
-var polylineGreenTop2 = draw.polyline([ x[4] +3,y[4] -5,    x[7] +2,y[7]-5, ]);	
-var polylineGreenTop3 = draw.polyline([ x[8] +3,y[8] -12.4, x[11]+2,y[11]-12.4, ]);	
+
+var polylineGreenTop1 = draw.polyline([ x[39]+3,y[39]-5,    x[3] +2,y[3]-12.4, ]);
+var polylineGreenTop2 = draw.polyline([ x[4] +3,y[4] -5,    x[7] +2,y[7]-5, ]);
+var polylineGreenTop3 = draw.polyline([ x[8] +3,y[8] -12.4, x[11]+2,y[11]-12.4, ]);
 var polylineGreenTop4 = draw.polyline([ x[12]+3,y[12]-5,    x[15]+2,y[15]-5, ]);
 
-var polylineGreenTopMin1 = drawMin.polyline([ (x[39]+3)/4, (y[39]-5)/4,    (x[3] +2)/4, (y[3]-12.4)/4,]);	
-var polylineGreenTopMin2 = drawMin.polyline([ (x[4] +3)/4, (y[4] -5)/4,    (x[7] +2)/4, (y[7]-5)/4, ]);	
-var polylineGreenTopMin3 = drawMin.polyline([ (x[8] +3)/4, (y[8] -12.4)/4, (x[11]+2)/4, (y[11]-12.4)/4,]);	
+var polylineGreenTopMin1 = drawMin.polyline([ (x[39]+3)/4, (y[39]-5)/4,    (x[3] +2)/4, (y[3]-12.4)/4,]);
+var polylineGreenTopMin2 = drawMin.polyline([ (x[4] +3)/4, (y[4] -5)/4,    (x[7] +2)/4, (y[7]-5)/4, ]);
+var polylineGreenTopMin3 = drawMin.polyline([ (x[8] +3)/4, (y[8] -12.4)/4, (x[11]+2)/4, (y[11]-12.4)/4,]);
 var polylineGreenTopMin4 = drawMin.polyline([ (x[12]+3)/4, (y[12]-5)/4,    (x[15]+2)/4, (y[15]-5)/4, ]);
-	
-var polylineGreenCenter1 = draw.polyline([ x[3] +10,y[3] -4.2, x[33]+10,y[33]-5.8 ]);	
-var polylineGreenCenter2 = draw.polyline([ x[7] +10,y[7] -4.2, x[29]+10,y[29]-5.8 ]);	
-var polylineGreenCenter3 = draw.polyline([ x[11]+10,y[11]-4.2, x[25]+10,y[25]-5.8 ]);	
+
+var polylineGreenCenter1 = draw.polyline([ x[3] +10,y[3] -4.2, x[33]+10,y[33]-5.8 ]);
+var polylineGreenCenter2 = draw.polyline([ x[7] +10,y[7] -4.2, x[29]+10,y[29]-5.8 ]);
+var polylineGreenCenter3 = draw.polyline([ x[11]+10,y[11]-4.2, x[25]+10,y[25]-5.8 ]);
 var polylineGreenCenter4 = draw.polyline([ x[16]+2.5 ,y[16]-4.2, x[19]+2.5 ,y[19]-5.8 ]);
-	
-var polylineGreenCenterMin1 = drawMin.polyline([ (x[3] +10)/4, (y[3] -4.2)/4, (x[33]+10)/4, (y[33]-5.8)/4 ]);	
-var polylineGreenCenterMin2 = drawMin.polyline([ (x[7] +10)/4, (y[7] -4.2)/4, (x[29]+10)/4, (y[29]-5.8)/4 ]);	
-var polylineGreenCenterMin3 = drawMin.polyline([ (x[11]+10)/4, (y[11]-4.2)/4, (x[25]+10)/4, (y[25]-5.8)/4 ]);	
+
+var polylineGreenCenterMin1 = drawMin.polyline([ (x[3] +10)/4, (y[3] -4.2)/4, (x[33]+10)/4, (y[33]-5.8)/4 ]);
+var polylineGreenCenterMin2 = drawMin.polyline([ (x[7] +10)/4, (y[7] -4.2)/4, (x[29]+10)/4, (y[29]-5.8)/4 ]);
+var polylineGreenCenterMin3 = drawMin.polyline([ (x[11]+10)/4, (y[11]-4.2)/4, (x[25]+10)/4, (y[25]-5.8)/4 ]);
 var polylineGreenCenterMin4 = drawMin.polyline([ (x[16]+2.5)/4,(y[16]-4.2)/4, (x[19]+2.5)/4,(y[19]-5.8)/4 ]);
-	
+
 var polylineGreenBottom1 = draw.polyline([ x[36]+3,y[36]-5,   x[33]+2,y[33]+2.5 ]);
 var polylineGreenBottom2 = draw.polyline([ x[32]+3,y[32]-5,   x[29]+2,y[29]-5 ]);
 var polylineGreenBottom3 = draw.polyline([ x[28]+3,y[28]+2.5, x[25]+2,y[25]+2.5 ]);
 var polylineGreenBottom4 = draw.polyline([ x[23]+3,y[23]-5,   x[20]+2,y[20]-5 ]);
-	
+
 var polylineGreenBottomMin1 = drawMin.polyline([ (x[36]+3)/4,(y[36]-5)/4,   (x[33]+2)/4,(y[33]+2.5)/4 ]);
 var polylineGreenBottomMin2 = drawMin.polyline([ (x[32]+3)/4,(y[32]-5)/4,   (x[29]+2)/4,(y[29]-5)/4   ]);
 var polylineGreenBottomMin3 = drawMin.polyline([ (x[28]+3)/4,(y[28]+2.5)/4, (x[25]+2)/4,(y[25]+2.5)/4 ]);
 var polylineGreenBottomMin4 = drawMin.polyline([ (x[23]+3)/4,(y[23]-5)/4,   (x[20]+2)/4,(y[20]-5)/4   ]);
 
-} //end of IF (Hor)
-	
-if (document.getElementById('ver').checked==true ) {
-var x = [0, /* 0 */
-		15, /* 1 */
-		 m+(width/2)+raznitsa, /* 2 */
-		 m+(width/2)+raznitsa, /* 3 */
-		 m+(width/2)+raznitsa+10*raznitsa, /* 4 */
-		 m+(width/2)+raznitsa-10*raznitsa + height, /* 5 */
-		 m+(width/2)+raznitsa+height, /* 6 */
-		 m+(width/2)+raznitsa+height, /* 7 */
-		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 8 */
-		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 9 */
-		 m+(width/2)+raznitsa+height, /* 10 */
-		 m+(width/2)+raznitsa+height, /* 11 */
-		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 12 */
-		 m+(width/2)+raznitsa+height + (width/2)+raznitsa, /* 13 */
-		 m+(width/2)+raznitsa+height, /* 14 */
-		 m+(width/2)+raznitsa+height, /* 15 */
-		 m+(width/2)+raznitsa, /* 16 */
-		 m+(width/2)+raznitsa, /* 17 */
-		];
-	
-var y = [0, /* 0 */
-		15, /* 1 */
-		 n, /* 2 */
-		 n+mejdu/2, /* 3 */
-		 n+mejdu/2-40*raznitsa, /* 4 */
-		 n+mejdu/2-40*raznitsa, /* 5 */
-		 n+mejdu/2-30*raznitsa, /* 6 */
-		 n+mejdu/2-10*raznitsa, /* 7 */
-		 n+mejdu/2-10*raznitsa, /* 8 */
-		 n+mejdu/2-10*raznitsa+width, /* 9 */
-		 n+mejdu/2-10*raznitsa+width, /* 10 */
-		 n+mejdu/2-10*raznitsa+width+mejdu, /* 11 */
-		 n+mejdu/2-10*raznitsa+width+mejdu, /* 12 */
-		 n+mejdu/2-10*raznitsa+width+mejdu+length, /* 13 */
-		 n+mejdu/2-10*raznitsa+width+mejdu+length, /* 14 */
-		 n+mejdu/2-10*raznitsa+width+mejdu+length+20*raznitsa, /* 15 */
-		 n+mejdu/2-10*raznitsa+width+mejdu+length+20*raznitsa, /* 16 */
-		 n+mejdu/2-10*raznitsa+width+mejdu+length, /* 17 */
-		];
-}
-	
 polyline.fill('none').move(10, 10);
 polylineT.fill('none');
 polylineU.fill('none');
-	
+
 polylineMin.fill('none');
 polylineTMin.fill('none');
 polylineUMin.fill('none');
 
-var strokeRed = { color: '#e31e24', width: 0.8, linecap: 'square', linejoin: 'square' };
-var strokeGreen = { color: '#0f0', width: 0.8, linecap: 'square', linejoin: 'square' };
-	
-polyline.stroke(strokeRed);
 polylineT.stroke(strokeRed);
 polylineU.stroke(strokeRed);
 
-polylineMin.stroke(strokeRed);	
+polylineMin.stroke(strokeRed);
 polylineTMin.stroke(strokeRed);
 polylineUMin.stroke(strokeRed);
 
 polylineGreenTop1.fill('none');
 polylineGreenTop2.fill('none');
-	
+
 polylineGreenTopMin1.fill('none');
 polylineGreenTopMin2.fill('none');
-	
-	
+
 polylineGreenTop1.stroke(strokeGreen);
 polylineGreenTop2.stroke(strokeGreen);
 polylineGreenTop3.stroke(strokeGreen);
 polylineGreenTop4.stroke(strokeGreen);
-	
+
 polylineGreenTopMin1.stroke(strokeGreen);
 polylineGreenTopMin2.stroke(strokeGreen);
 polylineGreenTopMin3.stroke(strokeGreen);
-polylineGreenTopMin4.stroke(strokeGreen);	
-	
+polylineGreenTopMin4.stroke(strokeGreen);
+
 polylineGreenCenter1.stroke(strokeGreen);
 polylineGreenCenter2.stroke(strokeGreen);
 polylineGreenCenter3.stroke(strokeGreen);
 polylineGreenCenter4.stroke(strokeGreen);
-	
+
 polylineGreenCenterMin1.stroke(strokeGreen);
 polylineGreenCenterMin2.stroke(strokeGreen);
 polylineGreenCenterMin3.stroke(strokeGreen);
-polylineGreenCenterMin4.stroke(strokeGreen);	
-	
+polylineGreenCenterMin4.stroke(strokeGreen);
+
 polylineGreenBottom1.stroke(strokeGreen);
 polylineGreenBottom2.stroke(strokeGreen);
 polylineGreenBottom3.stroke(strokeGreen);
 polylineGreenBottom4.stroke(strokeGreen);
-		
+
 polylineGreenBottomMin1.stroke(strokeGreen);
 polylineGreenBottomMin2.stroke(strokeGreen);
 polylineGreenBottomMin3.stroke(strokeGreen);
-polylineGreenBottomMin4.stroke(strokeGreen);	
+polylineGreenBottomMin4.stroke(strokeGreen);
+} //end of IF (Hor)
+
+if (document.getElementById('ver').checked==true ) {
+var x = [0, /* 0 */
+		 15, /* 1 */
+		 m+width/2+raznitsa, /* 2 */
+		 m+width/2+raznitsa, /* 3 */
+		 m+width/2+raznitsa + height, /* 4 */
+		 m+width/2+raznitsa + height, /* 5 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu + width/2+raznitsa, /* 6 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu + width/2+raznitsa, /* 7 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu/2, /* 8 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu/2, /* 9 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu + width/2+raznitsa, /* 10 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu + width/2+raznitsa, /* 11 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu/2, /* 12 */
+		 m+width/2+raznitsa + height + 4*raznitsa + mejdu/2, /* 13 */
+		 m+width/2+raznitsa + 2*raznitsa - 10*raznitsa + height, /* 14 */
+		 m+width/2+raznitsa + 2*raznitsa + 10*raznitsa, /* 15 */
+		 m+width/2+raznitsa + 2*raznitsa, /* 16 */
+		 m+width/2+raznitsa + 2*raznitsa, /* 17 */
+		 m, /* 18 */
+		 m, /* 19 */
+		 m+width/2+raznitsa + 2*raznitsa, /* 20 */
+		 m+width/2+raznitsa + 2*raznitsa, /* 21 */
+		 m, /* 22 */
+		 m, /* 23 */
+		];
+
+var y = [0, /* 0 */
+		 15, /* 1 */
+		 n, /* 2 */
+		 n-2*raznitsa, /* 3 */
+		 n-2*raznitsa, /* 4 */
+		 n, /* 5 */
+		 n, /* 6 */
+		 n + length, /* 7 */
+		 n + length, /* 8 */
+		 n + length + mejdu, /* 9 */
+		 n + length + mejdu, /* 10 */
+		 n + length + mejdu + width, /* 11 */
+		 n + length + mejdu + width, /* 12 */
+		 n + length + mejdu + width + 2*raznitsa, /* 13 */
+		 n + length + mejdu + width + 2*raznitsa + 40*raznitsa, /* 14 */
+		 n + length + mejdu + width + 2*raznitsa + 40*raznitsa, /* 15 */
+		 n + length + mejdu + width + 2*raznitsa, /* 16 */
+		 n + length + mejdu + width, /* 17 */
+		 n + length + mejdu + width, /* 18 */
+		 n + length + mejdu, /* 19 */
+		 n + length + mejdu, /* 20 */
+		 n + length, /* 21 */
+		 n + length, /* 22 */
+		 n, /* 23 */
+		];
+
+	var polyline = draw.polyline([
+		x[1],y[1], x[2],y[2], x[3],y[3], x[4],y[4], x[5],y[5],
+		x[6],y[6], x[7],y[7], x[8],y[8], x[9],y[9], x[10],y[10],
+		x[11],y[11], x[12],y[12], x[13],y[13], x[14],y[14], x[15],y[15],
+		x[16],y[16], x[17],y[17], x[18],y[18], x[19],y[19], x[20],y[20],
+		x[21],y[21], x[22],y[22], x[23],y[23],
+	]);
+  
+	var polylineGreenLeft1 = draw.polyline([
+		//x[2],y[2], x[21],y[21],
+	]);
 	
-	//var editor = new Editor(SvgjsSvg1006);		
+	var polylineGreenLeft2 = draw.polyline([
+		//x[20]-mejdu/2,y[20], x[17]-mejdu/2,y[17],
+	]);
+
+	var polylineGreenCenter1 = draw.polyline([
+
+	]);
+
+	var polylineGreenCenter2 = draw.polyline([
+		
+	]);
+
+	var polylineGreenRight1 = draw.polyline([
+
+	]);
+
+	var polylineGreenRight2 = draw.polyline([
+	
+	]);
+
+
+	polyline.fill('none').move(15,15);
+
+	polylineGreenLeft1.stroke(strokeGreen);
+	polylineGreenLeft2.stroke(strokeGreen);
+	polylineGreenCenter1.stroke(strokeGreen);
+	polylineGreenCenter2.stroke(strokeGreen);
+	polylineGreenRight1.stroke(strokeGreen);
+	polylineGreenRight2.stroke(strokeGreen);
+
+	polylineGreenLeft1.fill('none');
+	polylineGreenLeft2.fill('none');
+	polylineGreenCenter1.fill('none');
+	polylineGreenCenter2.fill('none');
+	polylineGreenRight1.fill('none');
+	polylineGreenRight2.fill('none');
+
+
+}
+
+
+//var strokeRed = { color: '#e31e24', width: 0.8, linecap: 'square', linejoin: 'square' };
+//var strokeGreen = { color: '#0f0', width: 0.8, linecap: 'square', linejoin: 'square' };
+
+polyline.stroke(strokeRed);
+
+
+
+	//var editor = new Editor(SvgjsSvg1006);
 
 //}
 });
-	
+
 	// SAVE//
 	var link = document.createElement( 'a' );
 	link.style.display = 'none';
@@ -304,32 +373,32 @@ polylineGreenBottomMin4.stroke(strokeGreen);
 		link.click();
 
 	} );
-	
+
 	// CLEAR
 
 	clear.addEventListener( 'click', function () {
 			editor.clear();
 			editorMin.clear();
 		} );
-	
 
-</script>	
-	
-	
-	
-		
+
+</script>
+
+
+
+
 
 <script type="text/javascript" src="js/Selector.js"></script>
 <script type="text/javascript" src="js/Source.js"></script>
-	
-<!--			
+
+<!--
 <script type="text/javascript">
 	//function calculate1(){
 	var editor = new Editor(SvgjsSvg1001);
 	//editor.setSource( new Source( textarea ) );
-	
+
 	var date = new Date();
-			
+
 	// SAVE//
 	var link = document.createElement( 'a' );
 	link.style.display = 'none';
@@ -344,7 +413,7 @@ polylineGreenBottomMin4.stroke(strokeGreen);
 		link.click();
 
 	} );
-		
+
 	// CLEAR
 
 	clear.addEventListener( 'click', function () {
@@ -352,5 +421,5 @@ polylineGreenBottomMin4.stroke(strokeGreen);
 		} );
 	//}
 </script> -->
-		
+
 </html>
