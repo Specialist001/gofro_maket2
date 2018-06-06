@@ -1,11 +1,11 @@
 #drawing {
 	width: 100%;
-	//display: none;
+	display: none;
 }
 
 #drawingMin {
 	width: 100%;
-	display: none;
+	//display: none;
 }
 
 #SvgjsSvg1001 {
